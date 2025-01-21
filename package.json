@@ -1,0 +1,26 @@
+{
+  "name": "backend-for-smack",
+  "version": "1.0.0",
+  "description": "Smackathon",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "author": "Aditya",
+  "license": "ISC",
+  "dependencies": {
+    "accessibility": "^6.0.1",
+    "bcrypt": "^5.1.1",
+    "cloudinary": "^2.5.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.19.2",
+    "express-fileupload": "^1.5.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.2",
+    "nodemailer": "^6.9.16",
+    "react-hot-toast": "^2.5.1",
+    "react-toastify": "^11.0.3"
+  }
+}
