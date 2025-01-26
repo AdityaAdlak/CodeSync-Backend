@@ -20,7 +20,7 @@ app.use(cors({
     "http://localhost:3000", 
     "https://code-sync-frontend-lemon.vercel.app/" 
   ],
-  credentials: true, 
+  // credentials: true, 
   methods: ["GET", "POST", "DELETE", "PUT"],
 }));
 
