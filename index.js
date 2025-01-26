@@ -15,14 +15,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 
+
+
 app.use(cors({
-  origin: [
-    "http://localhost:3000", 
-    "https://code-sync-frontend-lemon.vercel.app/" 
-  ],
-  // credentials: true, 
+  origin: ["http://localhost:3000", "https://your-deployed-frontend-url.vercel.app"],
   methods: ["GET", "POST", "DELETE", "PUT"],
 }));
+
 
 
 const connection = require("./Config/dbConnectivity");
