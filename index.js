@@ -1,13 +1,11 @@
-
-
-
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const router = require("./Routes/router");
 
 const app = express();
-require("dotenv").config();
+
 
 
 
@@ -18,8 +16,12 @@ app.use(cookieParser());
 
 
 app.use(cors({
-  origin: "http://localhost:3000", 
-  methods: ["GET", "POST","DELETE","PUT"],
+  origin: [
+    "http://localhost:3000", 
+    "https://code-sync-frontend-lemon.vercel.app/" 
+  ],
+  credentials: true, 
+  methods: ["GET", "POST", "DELETE", "PUT"],
 }));
 
 
