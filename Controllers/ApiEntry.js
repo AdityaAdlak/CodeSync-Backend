@@ -21,7 +21,6 @@ exports.cppApiEntry = async () => {
 
             responses.push(response);
         }
-        console.log(response);
         console.log("C++ snippets added successfully!");
     } catch (error) {
         console.error("Error adding C++ snippets:", error);
