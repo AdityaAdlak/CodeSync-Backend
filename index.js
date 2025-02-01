@@ -22,7 +22,6 @@ app.use(cors({
   methods: ["GET", "POST", "DELETE", "PUT"],
 }));
 
-const cors = require('cors');
 
 // app.use(cors({
 //     origin: 'https://code-sync-frontend-kappa.vercel.app', 
