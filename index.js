@@ -10,23 +10,28 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:3000", // Local development URL
   "https://code-sync-frontend-kappa.vercel.app", // Vercel production URL
-  "https://codesync-backend-6-rlsb.onrender.com" // Render backend URL
+  "https://codesync-backend-6-rlsb.onrender.com", // Render backend URL
 ];
 
-// CORS setup
-app.use(cors({
-  origin: (origin, callback) => {
-    // Check if the origin is in the allowed list
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true); // Allow the origin
-    } else {
-      callback(new Error("Not allowed by CORS")); // Block if not allowed
-    }
-  },
-  credentials: true, // Allow cookies
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  optionsSuccessStatus: 200, // For legacy browsers that require 200 response code for preflight requests
-}));
+// Enhanced CORS setup
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      console.log("Incoming Origin:", origin); // Log incoming origin for debugging
+      // Allow requests with no origin (e.g., server-to-server requests)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true); // Allow the origin
+      } else {
+        console.error("Blocked by CORS:", origin); // Log blocked origins for debugging
+        callback(new Error("Not allowed by CORS")); // Block if not allowed
+      }
+    },
+    credentials: true, // Allow cookies
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+    optionsSuccessStatus: 200, // For legacy browsers
+  })
+);
 
 // Preflight handling for OPTIONS requests
 app.options("*", cors());
@@ -60,6 +65,13 @@ app.use((req, res, next) => {
 // Global error handler for server errors
 app.use((err, req, res, next) => {
   console.error(err.stack); // Log the error stack for debugging
+
+  // Ensure CORS headers are included in error responses
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+  }
+
   res.status(500).send({ error: "Something went wrong!" });
 });
 
