@@ -28,6 +28,9 @@ app.use(cors({
   optionsSuccessStatus: 200, // For legacy browsers that require 200 response code for preflight requests
 }));
 
+// Preflight handling for OPTIONS requests
+app.options("*", cors());
+
 // Middleware setup
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -47,6 +50,17 @@ app.use("/user/v1", router);
 // Test Route
 app.get("/", (req, res) => {
   res.send("This is Page");
+});
+
+// Catch all route for unmatched paths
+app.use((req, res, next) => {
+  res.status(404).send({ error: "Not Found" });
+});
+
+// Global error handler for server errors
+app.use((err, req, res, next) => {
+  console.error(err.stack); // Log the error stack for debugging
+  res.status(500).send({ error: "Something went wrong!" });
 });
 
 // Start Server
