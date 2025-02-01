@@ -6,31 +6,25 @@ const router = require("./Routes/router");
 
 const app = express();
 
+// CORS Configuration
+const allowedOrigins = [
+  "https://code-sync-frontend-kappa.vercel.app", // Vercel production URL
+  "http://localhost:3000", // Local development URL
+];
 
 app.use(cors({
-  orign : "*",
-}))
-// CORS Configuration
-// const allowedOrigins = [
-//   "http://localhost:3000", // Local development URL
-//   "https://code-sync-frontend-kappa.vercel.app", // Vercel production URL
-//   "https://codesync-backend-6-rlsb.onrender.com" // Render backend URL
-// ];
-
-// CORS setup
-// app.use(cors({
-//   origin: (origin, callback) => {
-//     // Check if the origin is in the allowed list
-//     if (!origin || allowedOrigins.includes(origin)) {
-//       callback(null, true); // Allow the origin
-//     } else {
-//       callback(new Error("Not allowed by CORS")); // Block if not allowed
-//     }
-//   },
-//   credentials: true, // Allow cookies
-//   methods: ["GET", "POST", "PUT", "DELETE"],
-//   optionsSuccessStatus: 200, // For legacy browsers that require 200 response code for preflight requests
-// }));
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      // Allow if origin is in allowed list or if the request is from localhost
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true, // Allow cookies and authentication headers
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  optionsSuccessStatus: 200,
+}));
 
 // Middleware setup
 app.use(express.json());
@@ -57,4 +51,4 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`App is running on PORT ${PORT}`);
-}); 
+});
