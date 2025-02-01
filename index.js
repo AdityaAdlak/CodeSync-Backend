@@ -17,17 +17,17 @@ app.use(cookieParser());
 
 
 
-// app.use(cors({
-//   origin: ["http://localhost:3000", "https://code-sync-frontend-kappa.vercel.app/"],
-//   methods: ["GET", "POST", "DELETE", "PUT"],
-// }));
+app.use(cors({
+  origin: ["http://localhost:3000", "https://code-sync-frontend-kappa.vercel.app/"],
+  methods: ["GET", "POST", "DELETE", "PUT"],
+}));
 
 const cors = require('cors');
 
-app.use(cors({
-    origin: 'https://code-sync-frontend-kappa.vercel.app', 
-    methods: 'GET,POST,PUT,DELETE',
-}));
+// app.use(cors({
+//     origin: 'https://code-sync-frontend-kappa.vercel.app', 
+//     methods: 'GET,POST,PUT,DELETE',
+// }));
 
 
 
