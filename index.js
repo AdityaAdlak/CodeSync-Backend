@@ -8,36 +8,38 @@ const app = express();
 
 // CORS Configuration
 const allowedOrigins = [
-  "http://localhost:3000",
-  "https://code-sync-frontend-kappa.vercel.app"
+  "http://localhost:3000", // Local development URL
+  "https://code-sync-frontend-kappa.vercel.app" // Vercel production URL
 ];
 
+// CORS setup
 app.use(cors({
-  origin: function (origin, callback) {
+  origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
+      callback(null, true); // Allow the origin
     } else {
-      callback(new Error("Not allowed by CORS"));
+      callback(new Error("Not allowed by CORS")); // Block if not allowed
     }
   },
-  credentials: true,
+  credentials: true, // Allow cookies
   methods: ["GET", "POST", "PUT", "DELETE"],
-  optionsSuccessStatus: 200,
+  optionsSuccessStatus: 200, // For legacy browsers that require 200 response code for preflight requests
 }));
 
+// Middleware setup
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Database Connection
+// Database Connection (ensure this works correctly)
 const connection = require("./Config/dbConnectivity");
 connection();
 
-// Initial Database Setup (if needed)
+// Initial Database Setup (ensure this is running)
 const createEntry = require("./Controllers/dbEntry");
 createEntry();
 
-// Routes
+// Routes setup
 app.use("/user/v1", router);
 
 // Test Route
