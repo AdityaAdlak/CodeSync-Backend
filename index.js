@@ -15,12 +15,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 
-
-
-app.use(cors({
-  origin: ["http://localhost:3000", "https://your-deployed-frontend-url.vercel.app"],
+const corsOptions = {
+  origin: ["https://code-sync-frontend-kappa.vercel.app/"],  
   methods: ["GET", "POST", "DELETE", "PUT"],
-}));
+  credentials: true,  
+};
+
+app.use(cors(corsOptions));
+
 
 
 
@@ -39,7 +41,7 @@ const PORT = process.env.PORT || 5000;
 
 
 app.get("/", (req, res) => {
-  res.send("This is Home Page");
+  res.send("This is Page");
 });
 
 
