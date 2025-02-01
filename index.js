@@ -15,14 +15,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 
-const corsOptions = {
-  origin: ["https://code-sync-frontend-kappa.vercel.app/"],  
+
+
+app.use(cors({
+  origin: ["http://localhost:3000", "https://code-sync-frontend-kappa.vercel.app/"],
   methods: ["GET", "POST", "DELETE", "PUT"],
   credentials: true,  
-};
-
-app.use(cors(corsOptions));
-
+}));
 
 
 
