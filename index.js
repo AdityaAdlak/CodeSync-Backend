@@ -9,12 +9,14 @@ const app = express();
 // CORS Configuration
 const allowedOrigins = [
   "http://localhost:3000", // Local development URL
-  "https://code-sync-frontend-kappa.vercel.app" // Vercel production URL
+  "https://code-sync-frontend-kappa.vercel.app", // Vercel production URL
+  "https://codesync-backend-6-rlsb.onrender.com" // Render backend URL
 ];
 
 // CORS setup
 app.use(cors({
   origin: (origin, callback) => {
+    // Check if the origin is in the allowed list
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true); // Allow the origin
     } else {
