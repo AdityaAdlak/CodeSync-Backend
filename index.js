@@ -15,7 +15,7 @@ app.options('*', cors());
 
 // Enable CORS with additional headers
 app.use(cors({
-  origin: ["http://localhost:3000", "https://code-sync-frontend-kappa.vercel.app/"],
+  origin: ["http://localhost:3000", "https://codesync-frontend-1.onrender.com"],
   methods: ["GET", "POST", "DELETE", "PUT"],
    // Allow specific headers
 }));
