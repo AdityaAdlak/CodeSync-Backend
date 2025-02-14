@@ -47,4 +47,15 @@ router.delete("/deleteSnippet/:id",(req,res)=>{
 router.get("/aiSnippet/:tag/:language",(req,res)=>{
     promptFinder(req,res);
 })
+
+// router.get("/aiSnippet/:tag/:language", async (req, res) => {
+//     console.log("Received Params:", req.params); 
+//     try {
+//         await promptFinder(req, res);
+//     } catch (error) {
+//         console.error("Error in promptFinder:", error);
+//         res.status(500).json({ error: "Internal Server Error" });
+//     }
+// });
+
 module.exports = router;
