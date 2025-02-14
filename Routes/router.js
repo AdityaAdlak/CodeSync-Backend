@@ -7,7 +7,7 @@ const {languageMidd} = require("../Controllers/language");
 const {userSnippetEntry , searchSnippetByTitle , deleteSnippet , updateSnippet} = require("../Controllers/userSnippetEntry");
 const {getCppData,getJavaData,getPythonData} = require("../Controllers/getData");
 const {getAllData} = require("../Controllers/GetAllData");
-
+const {promptFinder} = require("../AI/ai.controller");
 
 router.post("/signup",(req,res)=>{
     signup(req,res);
@@ -42,5 +42,9 @@ router.get("/searchSnippet/:title",(req,res)=>{
 
 router.delete("/deleteSnippet/:id",(req,res)=>{
     deleteSnippet(req,res);
+})
+
+router.get("/aiSnippet/:tag/:language",(req,res)=>{
+    promptFinder(req,res);
 })
 module.exports = router;
